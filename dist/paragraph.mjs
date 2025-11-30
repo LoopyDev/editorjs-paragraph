@@ -97,7 +97,7 @@ class g {
       name: d,
       children: {
         items: t.map((n) => ({
-          icon: o === "text" ? this.makeTypeIcon(n.value) : this.makeHighlightIcon(n.value, (i == null ? void 0 : i()) || "default"),
+          icon: o === "text" ? this.makeTypeIcon(n.value) : this.makeHighlightIcon(n.value, (i == null ? void 0 : i()) || "default", !0),
           title: n.label,
           onActivate: () => l(n.value),
           isActive: () => s() === n.value,
@@ -367,3 +367,4 @@ class g {
 export {
   g as default
 };
+//# sourceMappingURL=paragraph.mjs.map
