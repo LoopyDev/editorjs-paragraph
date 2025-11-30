@@ -1,5 +1,7 @@
 import { API, ConversionConfig, HTMLPasteEvent, PasteConfig, SanitizerConfig, ToolConfig, ToolboxConfig } from '@editorjs/editorjs';
 
+type MenuConfig = any[];
+type ParagraphColorValue = 'default' | 'gray' | 'brown' | 'orange' | 'yellow' | 'green' | 'blue' | 'purple' | 'pink' | 'red';
 /**
  * Base Paragraph Block for the Editor.js.
  * Represents a regular text block
@@ -33,6 +35,14 @@ export interface ParagraphData {
      * Paragraph's content
      */
     text: string;
+    /**
+     * Text colour choice
+     */
+    textColor?: ParagraphColorValue;
+    /**
+     * Background highlight choice
+     */
+    backgroundColor?: ParagraphColorValue;
 }
 /**
  * @typedef {object} ParagraphParams
@@ -97,6 +107,10 @@ export default class Paragraph {
      */
     private _preserveBlank;
     /**
+     * Cached highlight icon markup
+     */
+    private highlightSvg;
+    /**
      * Render plugin`s main Element and fill it with saved data
      *
      * @param {object} params - constructor params
@@ -106,6 +120,54 @@ export default class Paragraph {
      * @param {boolean} readOnly - read only mode flag
      */
     constructor({ data, config, api, readOnly }: ParagraphParams);
+    /**
+     * Normalize a color value against the supported palette
+     */
+    private normalizeColorValue;
+    /**
+     * Normalize input data
+     */
+    private normalizeData;
+    /**
+     * Build a nested menu section for colours
+     */
+    private buildColorMenu;
+    /**
+     * Icon used for palette buttons
+     */
+    private paletteIcon;
+    /**
+     * Small round swatch icon
+     */
+    private makeSwatchIcon;
+    /**
+     * Bootstrap "Type" icon tinted per colour option
+     */
+    private makeTypeIcon;
+    /**
+     * Highlight preview icon showing background with current text colour
+     */
+    private makeHighlightIcon;
+    /**
+     * Returns the cached Bootstrap alphabet icon markup with our class applied
+     */
+    private getHighlightSvg;
+    /**
+     * Update CSS variables so open menu icons reflect current colours
+     */
+    private updatePreviewVars;
+    /**
+     * Apply classes to reflect current colour choices
+     */
+    private applyColors;
+    /**
+     * Set text colour
+     */
+    setTextColor(color: ParagraphColorValue): void;
+    /**
+     * Set background highlight colour
+     */
+    setBackgroundColor(color: ParagraphColorValue): void;
     /**
      * Check if text content is empty and set empty string to inner html.
      * We need this because some browsers (e.g. Safari) insert <br> into empty contenteditanle elements
@@ -186,5 +248,17 @@ export default class Paragraph {
      * @returns {ToolboxConfig} - Paragraph Toolbox Setting
      */
     static get toolbox(): ToolboxConfig;
+    /**
+     * Returns paragraph block tunes config (colours)
+     */
+    renderSettings(): MenuConfig;
+    /**
+     * Get current Tool`s data
+     */
+    get data(): ParagraphData;
+    /**
+     * Store data in plugin and apply changes
+     */
+    set data(data: ParagraphData);
 }
 export {};

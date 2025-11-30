@@ -1,6 +1,54 @@
+:root {
+  --ce-paragraph-color-default: var(--text-primary, #e5e7eb);
+  --ce-paragraph-color-gray: #9ca3af;
+  --ce-paragraph-color-brown: #d6a052;
+  --ce-paragraph-color-orange: #fb923c;
+  --ce-paragraph-color-yellow: #facc15;
+  --ce-paragraph-color-green: #4ade80;
+  --ce-paragraph-color-blue: #60a5fa;
+  --ce-paragraph-color-purple: #c084fc;
+  --ce-paragraph-color-pink: #f472b6;
+  --ce-paragraph-color-red: #f87171;
+
+  --ce-paragraph-bg-default: transparent;
+  --ce-paragraph-bg-gray: rgba(148, 163, 184, 0.18);
+  --ce-paragraph-bg-brown: rgba(181, 129, 74, 0.22);
+  --ce-paragraph-bg-orange: rgba(249, 115, 22, 0.22);
+  --ce-paragraph-bg-yellow: rgba(234, 179, 8, 0.25);
+  --ce-paragraph-bg-green: rgba(34, 197, 94, 0.2);
+  --ce-paragraph-bg-blue: rgba(59, 130, 246, 0.2);
+  --ce-paragraph-bg-purple: rgba(168, 85, 247, 0.2);
+  --ce-paragraph-bg-pink: rgba(236, 72, 153, 0.2);
+  --ce-paragraph-bg-red: rgba(239, 68, 68, 0.2);
+}
+
+:root[data-theme='light'] {
+  --ce-paragraph-color-default: var(--text-primary, #0f172a);
+  --ce-paragraph-color-gray: #4b5563;
+  --ce-paragraph-color-brown: #92400e;
+  --ce-paragraph-color-orange: #c2410c;
+  --ce-paragraph-color-yellow: #854d0e;
+  --ce-paragraph-color-green: #15803d;
+  --ce-paragraph-color-blue: #1d4ed8;
+  --ce-paragraph-color-purple: #6b21a8;
+  --ce-paragraph-color-pink: #be185d;
+  --ce-paragraph-color-red: #b91c1c;
+
+  --ce-paragraph-bg-gray: #e5e7eb;
+  --ce-paragraph-bg-brown: #f3e8d2;
+  --ce-paragraph-bg-orange: #ffedd5;
+  --ce-paragraph-bg-yellow: #fef9c3;
+  --ce-paragraph-bg-green: #dcfce7;
+  --ce-paragraph-bg-blue: #dbeafe;
+  --ce-paragraph-bg-purple: #ede9fe;
+  --ce-paragraph-bg-pink: #ffe4e6;
+  --ce-paragraph-bg-red: #fee2e2;
+}
+
 .ce-paragraph {
-    line-height: 1.6em;
-    outline: none;
+  line-height: 1.6em;
+  outline: none;
+  color: var(--ce-paragraph-color-default);
 }
 
 /**
@@ -20,4 +68,92 @@
 
 .ce-paragraph p:last-of-type{
     margin-bottom: 0;
+}
+
+.ce-paragraph--has-bg {
+  display: inline-block;
+  max-width: 100%;
+  padding: 0.15em 0.4em;
+  border-radius: 6px;
+  line-height: 1.6em;
+}
+
+.ce-paragraph--text-gray { color: var(--ce-paragraph-color-gray); }
+.ce-paragraph--text-brown { color: var(--ce-paragraph-color-brown); }
+.ce-paragraph--text-orange { color: var(--ce-paragraph-color-orange); }
+.ce-paragraph--text-yellow { color: var(--ce-paragraph-color-yellow); }
+.ce-paragraph--text-green { color: var(--ce-paragraph-color-green); }
+.ce-paragraph--text-blue { color: var(--ce-paragraph-color-blue); }
+.ce-paragraph--text-purple { color: var(--ce-paragraph-color-purple); }
+.ce-paragraph--text-pink { color: var(--ce-paragraph-color-pink); }
+.ce-paragraph--text-red { color: var(--ce-paragraph-color-red); }
+
+.ce-paragraph--bg-gray { background: var(--ce-paragraph-bg-gray); }
+.ce-paragraph--bg-brown { background: var(--ce-paragraph-bg-brown); }
+.ce-paragraph--bg-orange { background: var(--ce-paragraph-bg-orange); }
+.ce-paragraph--bg-yellow { background: var(--ce-paragraph-bg-yellow); }
+.ce-paragraph--bg-green { background: var(--ce-paragraph-bg-green); }
+.ce-paragraph--bg-blue { background: var(--ce-paragraph-bg-blue); }
+.ce-paragraph--bg-purple { background: var(--ce-paragraph-bg-purple); }
+.ce-paragraph--bg-pink { background: var(--ce-paragraph-bg-pink); }
+.ce-paragraph--bg-red { background: var(--ce-paragraph-bg-red); }
+
+.ce-paragraph__swatch {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  box-shadow: 0 0 0 1px var(--ce-header-swatch-border, rgba(255, 255, 255, 0.2));
+}
+
+.ce-paragraph__swatch--text {
+  background: currentColor;
+}
+
+.ce-paragraph__swatch--background {
+  background: currentColor;
+}
+
+.ce-paragraph__type-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  width: 18px;
+  height: 18px;
+  line-height: 1;
+  filter: none;
+}
+
+.ce-paragraph__type-icon path {
+  stroke: currentColor;
+  stroke-width: 0.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.ce-paragraph__highlight-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  padding: 2px 4px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.ce-paragraph__highlight-svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+  color: inherit;
+}
+
+.ce-paragraph__highlight-svg path {
+  fill: currentColor;
+  stroke: none;
 }
