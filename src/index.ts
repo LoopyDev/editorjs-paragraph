@@ -301,7 +301,7 @@ export default class Paragraph {
           icon:
             mode === 'text'
               ? this.makeTypeIcon(opt.value)
-              : this.makeHighlightIcon(opt.value, (textColorForPreview?.() || 'default')),
+              : this.makeHighlightIcon(opt.value, (textColorForPreview?.() || 'default'), true),
           title: opt.label,
           onActivate: () => onSelect(opt.value),
           isActive: () => current() === opt.value,
