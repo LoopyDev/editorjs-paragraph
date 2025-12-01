@@ -301,7 +301,7 @@ export default class Paragraph {
           icon:
             mode === 'text'
               ? this.makeTypeIcon(opt.value)
-              : this.makeHighlightIcon(opt.value, (textColorForPreview?.() || 'default'), true),
+              : this.makeHighlightIcon(opt.value, (textColorForPreview?.() || 'default')),
           title: opt.label,
           onActivate: () => onSelect(opt.value),
           isActive: () => current() === opt.value,
@@ -356,7 +356,7 @@ export default class Paragraph {
     const bgVar = `--ce-paragraph-bg-${background}`;
     const textVar = `--ce-paragraph-color-${textColor}`;
     const bgValue = usePreviewVar ? `var(--ce-paragraph-preview-bg, var(${bgVar}))` : `var(${bgVar})`;
-    const textValue = usePreviewVar ? 'var(--ce-paragraph-preview-text, currentColor)' : `var(${textVar})`;
+    const textValue = `var(--ce-paragraph-preview-text, var(${textVar}))`;
     const style = `background: ${bgValue}; color: ${textValue};`;
     return `<span class="ce-paragraph__highlight-icon" style="${style}">${this.getHighlightSvg(textValue)}</span>`;
   }

@@ -97,7 +97,7 @@ class g {
       name: d,
       children: {
         items: t.map((n) => ({
-          icon: o === "text" ? this.makeTypeIcon(n.value) : this.makeHighlightIcon(n.value, (i == null ? void 0 : i()) || "default", !0),
+          icon: o === "text" ? this.makeTypeIcon(n.value) : this.makeHighlightIcon(n.value, (i == null ? void 0 : i()) || "default"),
           title: n.label,
           onActivate: () => l(n.value),
           isActive: () => s() === n.value,
@@ -138,7 +138,7 @@ class g {
    * Highlight preview icon showing background with current text colour
    */
   makeHighlightIcon(e, t, a = !1) {
-    const l = `--ce-paragraph-bg-${e}`, r = `--ce-paragraph-color-${t}`, o = a ? `var(--ce-paragraph-preview-bg, var(${l}))` : `var(${l})`, i = a ? "var(--ce-paragraph-preview-text, currentColor)" : `var(${r})`;
+    const l = `--ce-paragraph-bg-${e}`, r = `--ce-paragraph-color-${t}`, o = a ? `var(--ce-paragraph-preview-bg, var(${l}))` : `var(${l})`, i = `var(--ce-paragraph-preview-text, var(${r}))`;
     return `<span class="ce-paragraph__highlight-icon" style="${`background: ${o}; color: ${i};`}">${this.getHighlightSvg(i)}</span>`;
   }
   /**
@@ -367,4 +367,3 @@ class g {
 export {
   g as default
 };
-//# sourceMappingURL=paragraph.mjs.map
