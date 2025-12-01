@@ -89,21 +89,21 @@ class g {
   /**
    * Build a nested menu section for colours
    */
-  buildColorMenu(e, t, a, l, r, o, i) {
+  buildColorMenu(e, t, a, l, i, o, r) {
     const s = a, d = e.toLowerCase().replace(/\s+/g, "-");
     return {
-      icon: o === "text" ? this.makeTypeIcon(s() || "default", !0) : this.makeHighlightIcon(s() || "default", (i == null ? void 0 : i()) || "default", !0),
+      icon: o === "text" ? this.makeTypeIcon(s() || "default", !0) : this.makeHighlightIcon(s() || "default", (r == null ? void 0 : r()) || "default", !0),
       title: e,
       name: d,
       children: {
         items: t.map((n) => ({
-          icon: o === "text" ? this.makeTypeIcon(n.value) : this.makeHighlightIcon(n.value, (i == null ? void 0 : i()) || "default"),
+          icon: o === "text" ? this.makeTypeIcon(n.value) : this.makeHighlightIcon(n.value, (r == null ? void 0 : r()) || "default"),
           title: n.label,
           onActivate: () => l(n.value),
           isActive: () => s() === n.value,
           closeOnActivate: !1,
-          toggle: r,
-          name: `${r}-${n.value}`
+          toggle: i,
+          name: `${i}-${n.value}`
         }))
       }
     };
@@ -138,8 +138,8 @@ class g {
    * Highlight preview icon showing background with current text colour
    */
   makeHighlightIcon(e, t, a = !1) {
-    const l = `--ce-paragraph-bg-${e}`, r = `--ce-paragraph-color-${t}`, o = a ? `var(--ce-paragraph-preview-bg, var(${l}))` : `var(${l})`, i = `var(--ce-paragraph-preview-text, var(${r}))`;
-    return `<span class="ce-paragraph__highlight-icon" style="${`background: ${o}; color: ${i};`}">${this.getHighlightSvg(i)}</span>`;
+    const l = `--ce-paragraph-bg-${e}`, i = `--ce-paragraph-color-${t}`, o = a ? `var(--ce-paragraph-preview-bg, var(${l}))` : `var(${l})`, r = `var(--ce-paragraph-preview-text, var(${i}))`;
+    return `<span class="ce-paragraph__highlight-icon" style="${`background: ${o}; color: ${r};`}">${this.getHighlightSvg(r)}</span>`;
   }
   /**
    * Returns the cached Bootstrap alphabet icon markup with our class applied
@@ -162,13 +162,14 @@ class g {
   /**
    * Apply classes to reflect current colour choices
    */
-  applyColors() {
-    if (!this._element)
+  applyColors(e) {
+    const t = e ?? this._element;
+    if (!t)
       return;
-    const e = h.filter((r) => r.value !== "default").map((r) => `ce-paragraph--text-${r.value}`), t = c.filter((r) => r.value !== "default").map((r) => `ce-paragraph--bg-${r.value}`);
-    this._element.classList.remove(...e, ...t, "ce-paragraph--has-bg");
-    const a = this._data.textColor || "default", l = this._data.backgroundColor || "default";
-    a !== "default" && this._element.classList.add(`ce-paragraph--text-${a}`), l !== "default" && this._element.classList.add(`ce-paragraph--bg-${l}`, "ce-paragraph--has-bg");
+    const a = h.filter((r) => r.value !== "default").map((r) => `ce-paragraph--text-${r.value}`), l = c.filter((r) => r.value !== "default").map((r) => `ce-paragraph--bg-${r.value}`);
+    t.classList.remove(...a, ...l, "ce-paragraph--has-bg");
+    const i = this._data.textColor || "default", o = this._data.backgroundColor || "default";
+    i !== "default" && t.classList.add(`ce-paragraph--text-${i}`), o !== "default" && t.classList.add(`ce-paragraph--bg-${o}`, "ce-paragraph--has-bg");
   }
   /**
    * Set text colour
@@ -209,8 +210,8 @@ class g {
    * @private
    */
   drawView() {
-    const e = document.createElement("DIV");
-    return e.classList.add(this._CSS.wrapper, this._CSS.block), e.contentEditable = "false", e.dataset.placeholderActive = this.api.i18n.t(this._placeholder), this._data.text && (e.innerHTML = this._data.text), this.readOnly || (e.contentEditable = "true", e.addEventListener("keyup", this.onKeyUp)), this.applyColors(), this.updatePreviewVars(), e;
+    const e = document.createElement("div");
+    return e.classList.add(this._CSS.wrapper, this._CSS.block), e.contentEditable = "false", e.dataset.placeholderActive = this.api.i18n.t(this._placeholder), this._data.text && (e.innerHTML = this._data.text), this.readOnly || (e.contentEditable = "true", e.addEventListener("keyup", this.onKeyUp)), this.applyColors(e), this.updatePreviewVars(), e;
   }
   /**
    * Return Tool's view
@@ -292,7 +293,9 @@ class g {
     return {
       text: {
         br: !0
-      }
+      },
+      textColor: !1,
+      backgroundColor: !1
     };
   }
   /**

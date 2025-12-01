@@ -389,8 +389,9 @@ export default class Paragraph {
   /**
    * Apply classes to reflect current colour choices
    */
-  private applyColors(): void {
-    if (!this._element) {
+  private applyColors(target?: HTMLDivElement | null): void {
+    const element = target ?? this._element;
+    if (!element) {
       return;
     }
 
@@ -401,17 +402,17 @@ export default class Paragraph {
       .filter((opt) => opt.value !== 'default')
       .map((opt) => `ce-paragraph--bg-${opt.value}`);
 
-    this._element.classList.remove(...textClasses, ...backgroundClasses, 'ce-paragraph--has-bg');
+    element.classList.remove(...textClasses, ...backgroundClasses, 'ce-paragraph--has-bg');
 
     const textColor = this._data.textColor || 'default';
     const backgroundColor = this._data.backgroundColor || 'default';
 
     if (textColor !== 'default') {
-      this._element.classList.add(`ce-paragraph--text-${textColor}`);
+      element.classList.add(`ce-paragraph--text-${textColor}`);
     }
 
     if (backgroundColor !== 'default') {
-      this._element.classList.add(`ce-paragraph--bg-${backgroundColor}`, 'ce-paragraph--has-bg');
+      element.classList.add(`ce-paragraph--bg-${backgroundColor}`, 'ce-paragraph--has-bg');
     }
   }
 
@@ -468,7 +469,7 @@ export default class Paragraph {
    * @private
    */
   drawView(): HTMLDivElement {
-    const div = document.createElement('DIV');
+    const div = document.createElement('div');
 
     div.classList.add(this._CSS.wrapper, this._CSS.block);
     div.contentEditable = 'false';
@@ -486,7 +487,7 @@ export default class Paragraph {
     /**
      * bypass property 'align' required in html div element
      */
-    this.applyColors();
+    this.applyColors(div);
     this.updatePreviewVars();
 
     return div as HTMLDivElement;
@@ -602,6 +603,8 @@ export default class Paragraph {
       text: {
         br: true,
       },
+      textColor: false,
+      backgroundColor: false,
     };
   }
 
